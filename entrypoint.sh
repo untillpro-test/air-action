@@ -13,3 +13,9 @@ printenv
 
 echo "### cat $GITHUB_EVENT_PATH"
 cat $GITHUB_EVENT_PATH
+
+echo "GITHUB_REF = $GITHUB_REF"
+
+if [ $GITHUB_REF = 'refs/heads/develop' ]; then
+	echo "### TODO: merge to master"
+fi
