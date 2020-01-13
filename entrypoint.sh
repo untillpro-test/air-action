@@ -2,14 +2,14 @@
 
 echo "Hello $1!!!"
 
+echo "### sh --version"
+sh --version
+
 echo "### ls -la"
 ls -la
 
 echo "### ls -ld"
 ls -ld
-
-echo "### sh --version"
-sh --version
 
 echo "### file -h /bin/sh"
 file -h /bin/sh
