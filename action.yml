@@ -1,0 +1,5 @@
+name: 'air-action'
+description: 'unTill Air Action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
