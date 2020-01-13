@@ -10,3 +10,6 @@ git --version
 
 echo "### printenv"
 printenv
+
+echo "### cat $(GITHUB_EVENT_PATH)"
+cat $(GITHUB_EVENT_PATH)
