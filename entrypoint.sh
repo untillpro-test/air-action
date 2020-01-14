@@ -28,7 +28,7 @@ echo $?
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
 	echo "### git checkout master"
-	git checkout master
+	git checkout master 2>&1
 	echo $?
 	echo "### git merge develop"
 	git merge develop
