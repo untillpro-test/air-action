@@ -18,5 +18,8 @@ echo
 echo "GITHUB_REF = $GITHUB_REF"
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
-	echo "### TODO: merge to master"
+	echo "### merge to master"
+	git checkout master
+	git merge develop
+	git push
 fi
