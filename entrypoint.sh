@@ -21,8 +21,8 @@ echo
 
 echo "GITHUB_REF = $GITHUB_REF"
 
-echo "### touch test2"
-touch test2
+echo "### touch test3"
+touch test3
 echo $?
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
