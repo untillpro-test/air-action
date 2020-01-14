@@ -21,6 +21,10 @@ echo
 
 echo "GITHUB_REF = $GITHUB_REF"
 
+echo "### touch test"
+touch test
+echo $?
+
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
 	echo "### git checkout master"
