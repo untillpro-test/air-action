@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-#set -e
+set -e
 
 echo "Hello $1!!!"
 
@@ -27,15 +27,8 @@ echo $?
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
-	echo "### fetch origin master"
-	git fetch origin master 2>&1
-	echo "### git checkout master"
-	git checkout master 2>&1
-	echo $?
-	echo "### git merge develop"
-	git merge develop
-	echo $?
-	echo "### git push"
-	git push
-	echo $?
+	git fetch origin master
+	git checkout master
+	git merge $GITHUB_SHA
+	git push 2>&1
 fi
