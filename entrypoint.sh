@@ -30,8 +30,8 @@ if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "### git fetch origin master"
 	git fetch origin master 2>&1
 	echo $?
-	echo "### git checkout master"
-	git checkout master 2>&1
+	# echo "### git checkout master"
+	# git checkout master 2>&1
 	echo $?
 	echo "### git merge $GITHUB_SHA"
 	git merge $GITHUB_SHA 2>&1
