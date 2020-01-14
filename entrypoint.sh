@@ -27,12 +27,8 @@ echo $?
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
-	echo "### git fetch origin master"
 	git fetch origin master
 	git checkout master
-	echo "### git merge $GITHUB_SHA"
 	git merge $GITHUB_SHA
-	echo "### git push"
 	git push 2>&1
-	echo $?
 fi
