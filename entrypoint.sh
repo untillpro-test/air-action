@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
-set -e
+set -o errexit
+set -o xtrace
 
 echo "Hello $1!!!"
 
