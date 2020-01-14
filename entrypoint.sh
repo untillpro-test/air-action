@@ -1,7 +1,8 @@
 #!/bin/sh -l
 
 set -o errexit
-set -o xtrace
+#set -o xtrace
+set -o verbose
 
 echo "Hello $1!!!"
 
