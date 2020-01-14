@@ -1,6 +1,10 @@
 #!/bin/sh -l
 
+set -e
+
 echo "Hello $1!!!"
+
+echo "## System info"
 
 echo "### ls -la"
 ls -la
@@ -18,8 +22,14 @@ echo
 echo "GITHUB_REF = $GITHUB_REF"
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
-	echo "### merge to master"
+	echo "## Merge to master"
+	echo "### git checkout master"
 	git checkout master
+	echo $?
+	echo "### git merge develop"
 	git merge develop
+	echo $?
+	echo "### git push"
 	git push
+	echo $?
 fi
