@@ -33,8 +33,8 @@ if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "### git checkout master"
 	git checkout master 2>&1
 	echo $?
-	echo "### git merge develop"
-	git merge develop 2>&1
+	echo "### git merge $GITHUB_SHA"
+	git merge $GITHUB_SHA 2>&1
 	echo $?
 	echo "### git push"
 	git push 2>&1
