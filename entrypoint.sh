@@ -1,6 +1,8 @@
 #!/bin/sh -l
 
-set -e
+set -o errexit
+#set -o xtrace
+set -o verbose
 
 echo "Hello $1!!!"
 
@@ -21,8 +23,8 @@ echo
 
 echo "GITHUB_REF = $GITHUB_REF"
 
-echo "### touch test1"
-touch test1
+echo "### touch test3"
+touch test3
 echo $?
 
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
