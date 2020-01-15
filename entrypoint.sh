@@ -22,6 +22,17 @@ for d in .*/; do
 	exit 1
 done
 
+gocnt=`ls -1 *.go 2>/dev/null | wc -l`
+if [[ $gocnt != 0 || -f "go.mod" ]]; then
+	echo "::debug::Go project detected"
+	# Get dependencies
+	## TODO: git config --global url."https://${VK_TOKEN}:x-oauth-basic@github.com/untillpro-test".insteadOf "https://github.com/untillpro-test"
+	go get -v -t -d ./...
+
+	# Build
+	go build -v .
+fi
+
 # Automatically merge from develop to master
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
