@@ -4,29 +4,25 @@ set -o errexit
 #set -o xtrace
 set -o verbose
 
-echo "Hello $1!!!"
+# Reject commits to master
+if [ "$GITHUB_REF" = 'refs/heads/master' ]; then
+	echo "::warning::Unexpected commit to master branch"
+	exit 1
+fi
 
-echo "## System info"
+# Reject ".*" folders
+for d in .*/; do
+	if [[ "$d" = "./" || "$d" = "../" ]]; then
+		continue
+	fi
+	if [[ "$d" = ".git/" || "$d" = ".github/" ]]; then
+		continue
+	fi
+	echo "::warning::Unexpected hidden directory detected: \"$d\""
+	exit 1
+done
 
-echo "### ls -la"
-ls -la
-
-echo "### git --version"
-git --version
-
-echo "### printenv"
-printenv
-
-echo "### cat $GITHUB_EVENT_PATH"
-cat $GITHUB_EVENT_PATH
-echo
-
-echo "GITHUB_REF = $GITHUB_REF"
-
-echo "### touch test3"
-touch test3
-echo $?
-
+# Automatically merge from develop to master
 if [ "$GITHUB_REF" = 'refs/heads/develop' ]; then
 	echo "## Merge to master"
 	git fetch origin master
