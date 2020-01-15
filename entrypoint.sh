@@ -2,7 +2,7 @@
 
 set -o errexit
 #set -o xtrace
-set -o verbose
+#set -o verbose
 
 # Reject commits to master
 if [ "$GITHUB_REF" = 'refs/heads/master' ]; then
