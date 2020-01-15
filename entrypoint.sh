@@ -18,7 +18,7 @@ for d in .*/; do
 	if [[ "$d" = ".git/" || "$d" = ".github/" ]]; then
 		continue
 	fi
-	echo "::warning::Unexpected hidden directory detected: \"$d\""
+	echo "::warning::Unexpected hidden directory: \"$d\""
 	exit 1
 done
 
