@@ -25,8 +25,13 @@ done
 gocnt=`ls -1 *.go 2>/dev/null | wc -l`
 if [[ $gocnt != 0 || -f "go.mod" ]]; then
 	echo "::debug::Go project detected"
+
+	export GOPRIVATE="github.com/untillpro-test,github.com/vitkud"
+	# go env -w GOPRIVATE=github.com/untillpro-test/*
+	git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/untillpro-test".insteadOf "https://github.com/untillpro-test"
+	git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/vitkud".insteadOf "https://github.com/vitkud"
+
 	# Get dependencies
-	## TODO: git config --global url."https://${VK_TOKEN}:x-oauth-basic@github.com/untillpro-test".insteadOf "https://github.com/untillpro-test"
 	go get -v -t -d ./...
 
 	# Build
