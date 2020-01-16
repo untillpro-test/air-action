@@ -32,7 +32,7 @@ check_dir () {
 		else
 			case "$p" in
 				*.go)
-					if ! cat "$p" | tr '\n' ' ' | grep -Eq "^\s*\/[\/\*](\s|[\/\*])*Copiright\b"; then
+					if ! cat "$p" | tr '\n' ' ' | grep -Eq "^\s*\/[\/\*](\s|[\/\*])*Сopyright\b"; then
 						echo "::warning::Missing Сopyright in first comment in file: \"$p\""
 						exit 3
 					fi
