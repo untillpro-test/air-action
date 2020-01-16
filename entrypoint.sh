@@ -19,8 +19,29 @@ for d in .*/; do
 		continue
 	fi
 	echo "::warning::Unexpected hidden directory: \"$d\""
-	exit 1
+	exit 2
 done
+
+#!/bin/sh
+
+# Reject sources which do not have "Copyright" word in first comment
+check_dir () {
+	for p in "$1"/*; do
+		if [ -d "$p" ]; then
+			check_dir "$p"
+		else
+			case "$p" in
+				*.go)
+					if ! grep -Pzq "^\s*\/[\/\*](\s|[\/\*])*Copiright\b" "$p"; then
+						echo "::warning::Missing Сopyright in first comment in file: \"$p\""
+						exit 3
+					fi
+				;;
+			esac
+		fi
+	done
+}
+check_dir .
 
 gocnt=`ls -1 *.go 2>/dev/null | wc -l`
 if [[ $gocnt != 0 || -f "go.mod" ]]; then
