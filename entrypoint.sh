@@ -28,8 +28,10 @@ if [[ $gocnt != 0 || -f "go.mod" ]]; then
 
 	export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}github.com/untillpro-test,github.com/vitkud"
 	# go env -w GOPRIVATE=github.com/untillpro-test/*
-	git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/untillpro-test".insteadOf "https://github.com/untillpro-test"
-	git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/vitkud".insteadOf "https://github.com/vitkud"
+	if [ -z "${GITHUB_TOKEN}" ]
+		git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/untillpro-test".insteadOf "https://github.com/untillpro-test"
+		git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/vitkud".insteadOf "https://github.com/vitkud"
+	fi
 
 	go build ./...
 	go test ./...
