@@ -1,6 +1,6 @@
-FROM alpine:3.11
+FROM golang:1.13
 
-RUN apk add --no-cache git go
+#RUN apk add --no-cache git go grep
 
 COPY entrypoint.sh /entrypoint.sh
 
