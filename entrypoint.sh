@@ -22,17 +22,20 @@ for d in .*/; do
 	exit 2
 done
 
-#!/bin/sh
-
 # Reject sources which do not have "Copyright" word in first comment
-check_dir () {
+getFirstComment() {
+	grep -Pzo '^(\s|\/\/[^\n]*\n|\/\*([^*]|\*(?!\/))*\*\/)*' "$1"
+}
+checkDir() {
 	for p in "$1"/*; do
 		if [ -d "$p" ]; then
-			check_dir "$p"
+			checkDir "$p"
 		else
 			case "$p" in
 				*.go)
-					if ! cat "$p" | tr '\n' ' ' | grep -Eq "^\s*\/[\/\*](\s|[\/\*])*Copyright\b"; then
+					firstComment = $(getFirstComment $p)
+					echo "$firstComment"
+					if [[ ! $firstComment =~ "Copyright" ]]; then
 						echo "::warning::Missing Copyright in first comment in file: \"$p\""
 						exit 3
 					fi
@@ -41,7 +44,7 @@ check_dir () {
 		fi
 	done
 }
-check_dir .
+checkDir .
 
 gocnt=`ls -1 *.go 2>/dev/null | wc -l`
 if [[ $gocnt != 0 || -f "go.mod" ]]; then

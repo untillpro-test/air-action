@@ -1,4 +1,4 @@
-FROM golang:1.13
+FROM alpine:1.13
 
 #RUN apk add --no-cache git go grep
 
