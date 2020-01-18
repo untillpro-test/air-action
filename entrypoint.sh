@@ -33,9 +33,9 @@ checkDir() {
 		else
 			case "$p" in
 				*.go)
-					firstComment = $(getFirstComment $p)
+					firstComment=$(getFirstComment $p)
 					echo "$firstComment"
-					if [[ ! $firstComment =~ "Copyright" ]]; then
+					if ! echo "$firstComment" | grep -Pzq "Copyright"; then
 						echo "::warning::Missing Copyright in first comment in file: \"$p\""
 						exit 3
 					fi
